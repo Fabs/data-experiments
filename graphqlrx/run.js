@@ -38,5 +38,9 @@ const query = `
 `
 
 // Calling the reactive version of graphql
+// graphqlRx or subscribeRx or executeRx does not work either
 graphql(scheme, query, null, { clockSource }).then(console.log.bind(console));
 subscribe(scheme, query, null, { clockSource }).then(console.log.bind(console));
+
+// From readme here
+// https://github.com/DxCx/graphql-rxjs
