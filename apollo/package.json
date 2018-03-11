@@ -1,0 +1,24 @@
+{
+  "name": "apollo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-cache-inmemory": "1.1.10",
+    "apollo-client": "2.2.6",
+    "apollo-link": "1.2.1",
+    "apollo-link-schema": "1.0.6",
+    "graphql": "0.13.1",
+    "graphql-tag": "2.8.0",
+    "graphql-tools": "2.21.0",
+    "react": "16.2.0",
+    "react-apollo": "2.0.4",
+    "rxjs": "5.5.6",
+    "rxjs-to-async-iterator": "^2.1.3"
+  }
+}
