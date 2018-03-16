@@ -1,33 +1,4 @@
-// PLUMBING
-
-import { Observable } from "rxjs";
-const packages = [
-  { name: "universe 1", url: "p1.hamburg", priority: 0 },
-  { name: "universe 2", url: "p2.hamburg", priority: 1 }
-];
-
-const packageStream = Observable.from(packages);
-
-import React from "React";
-import ReactDOMServer from "react-dom/server";
-
-const renderToConsoleTimes = (component, times, delay = 500) => {
-  const renderComponentToString = () =>
-    ReactDOMServer.renderToString(component);
-
-  Observable.range(0, 10)
-    .concatMap(value => Observable.of(value).delay(delay))
-    .map(value => [value, renderComponentToString()])
-    .subscribe(next, error, complete("render"));
-};
-
-// -------------------------------------------------------
-
-// utils
-const now = () => "[" + new Date().toISOString() + "]";
-const next = arg => console.log(now(), arg);
-const error = arg => console.error("ERR!", now(), arg);
-const complete = obs => () => console.log(obs, "Done!");
+import { next, error, complete } from "./plumbing";
 
 // 🔎 Newtork Stream Adaptor
 // 🔎 Network Protocol
@@ -42,8 +13,9 @@ const complete = obs => () => console.log(obs, "Done!");
 const importantQuery = source => source.filter(pkg => pkg.priority < 1);
 const allPackages = source => source;
 
-// v0.1 Model Schema
+// 👷 v0.1 Model Schema
 import { observableSource } from "./data-service";
+import { packageStream } from "./plumbing";
 
 const packageSource = observableSource(packageStream);
 // NOTE: For graphql it is really like
@@ -62,7 +34,10 @@ observe(packageSource, {
 }).subscribe(next, error, complete("obs1"));
 
 // 👷 v0.1 Mediator React API
+import React from "React";
+import ReactDOMServer from "react-dom/server";
 
+import { renderToConsoleTimes } from "./plumbing";
 // The way this component receives data is part of the api;
 const PackageList = ({ packages }) => {
   return React.createElement(
