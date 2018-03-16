@@ -1,0 +1,22 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "1.11.1"
+  },
+  "dependencies": {
+    "apollo-cache-inmemory": "1.1.11",
+    "apollo-client": "2.2.7",
+    "apollo-link": "1.2.1",
+    "apollo-link-schema": "1.0.6",
+    "graphql": "0.13.1",
+    "graphql-tag": "2.8.0",
+    "graphql-tools": "2.23.0",
+    "react": "16.2.0",
+    "react-apollo": "2.0.4",
+    "rxjs": "5.5.7",
+    "rxjs-to-async-iterator": "2.1.3"
+  }
+}
