@@ -11,11 +11,14 @@
     "apollo-client": "2.2.7",
     "apollo-link": "1.2.1",
     "apollo-link-schema": "1.0.6",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "graphql": "0.13.1",
     "graphql-tag": "2.8.0",
     "graphql-tools": "2.23.0",
-    "react": "16.2.0",
+    "react": "^16.2.0",
     "react-apollo": "2.0.4",
+    "react-dom": "^16.2.0",
     "rxjs": "5.5.7",
     "rxjs-to-async-iterator": "2.1.3"
   }

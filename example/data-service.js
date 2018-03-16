@@ -20,14 +20,25 @@ const observableSource = observable => {
 };
 
 // NOTE: pipeSource(src1, src2, ..., srcN) to merge many sources
+const packages = [{ name: "universe fake", url: "p1.hamburg", priority: 0 }];
+
+const reactExtension = observer => {
+  return {
+    react: component => {
+      // NOTE: what about class components?
+      return component({ packages: packages });
+    }
+  };
+};
 
 /**
  * Returns a stream of data from the source with results from the queries.
  */
 // NOTE: can pasos a single query instead of an object with multiple queries
+// NOTE: maybe no need for options?
 // 😈 write tests
 const observe = (source, operations, options = {}) => {
-  return Object.keys(operations).reduce((accSource, operationId) => {
+  const observer = Object.keys(operations).reduce((accSource, operationId) => {
     return accSource.merge(
       operations[operationId](
         source.map(result => {
@@ -37,6 +48,8 @@ const observe = (source, operations, options = {}) => {
       )
     );
   }, Observable.empty());
+
+  return Object.assign(observer, reactExtension(observer));
 };
 
 export {

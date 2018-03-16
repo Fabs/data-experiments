@@ -8,6 +8,19 @@ const packages = [
 
 const packageStream = Observable.from(packages);
 
+import React from "React";
+import ReactDOMServer from "react-dom/server";
+
+const renderToConsoleTimes = (component, times, delay = 500) => {
+  const renderComponentToString = () =>
+    ReactDOMServer.renderToString(component);
+
+  Observable.range(0, 10)
+    .concatMap(value => Observable.of(value).delay(delay))
+    .map(value => [value, renderComponentToString()])
+    .subscribe(next, error, complete("render"));
+};
+
 // -------------------------------------------------------
 
 // utils
@@ -24,12 +37,12 @@ const complete = obs => () => console.log(obs, "Done!");
 // 🔎 Model Subscription
 // 🔎 Model Mutation
 
-//v0.1 Model Query Live
+// 👷 v0.1 Model Query Live
 // NOTE This should become graphql, as it its does not make part of the api
 const importantQuery = source => source.filter(pkg => pkg.priority < 1);
-const allQuery = source => source;
+const allPackages = source => source;
 
-//v0.1 Model Schema
+// v0.1 Model Schema
 import { observableSource } from "./data-service";
 
 const packageSource = observableSource(packageStream);
@@ -38,7 +51,6 @@ const packageSource = observableSource(packageStream);
 
 // 🔎 Mediator class
 // 🔎 Mediator API
-// 🔎 Mediator React API
 // 🔎 Medtiador React State API (loading, error)
 
 // ✅ v0.1 Mediator observer API
@@ -46,5 +58,23 @@ import { observe } from "./data-service";
 
 observe(packageSource, {
   importantQuery,
-  allQuery
+  allPackages
 }).subscribe(next, error, complete("obs1"));
+
+// 👷 v0.1 Mediator React API
+
+// The way this component receives data is part of the api;
+const PackageList = ({ packages }) => {
+  return React.createElement(
+    "ul",
+    null,
+    packages.map((pkg, i) => React.createElement("li", { key: i }, pkg.name))
+  );
+};
+
+const PackagesPage = observe(packageSource, {
+  importantQuery,
+  packages: allPackages
+}).react(PackageList);
+
+renderToConsoleTimes(PackagesPage, 2);
