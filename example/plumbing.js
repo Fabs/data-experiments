@@ -1,4 +1,6 @@
-import { Observable } from "rxjs";
+import {
+  Observable
+} from "rxjs";
 import React from "React";
 import ReactDOMServer from "react-dom/server";
 
@@ -7,9 +9,16 @@ const next = arg => console.log(now(), arg);
 const error = arg => console.error("ERR!", now(), arg);
 const complete = obs => () => console.log(obs, "Done!");
 
-const packages = [
-  { name: "universe 1", url: "p1.hamburg", priority: 0 },
-  { name: "universe 2", url: "p2.hamburg", priority: 1 }
+const packages = [{
+    name: "universe 1",
+    url: "p1.hamburg",
+    priority: 0
+  },
+  {
+    name: "universe 2",
+    url: "p2.hamburg",
+    priority: 1
+  }
 ];
 
 const packageStream = Observable.from(packages);
@@ -24,4 +33,16 @@ const renderToConsoleTimes = (component, times, delay = 500) => {
     .subscribe(next, error, complete("render"));
 };
 
-export { packageStream, renderToConsoleTimes, next, error, complete };
+export {
+  packageStream,
+  renderToConsoleTimes,
+  next,
+  error,
+  complete
+};
+
+
+// https://github.com/Reactive-Extensions/RxJS/blob/master/src/core/perf/operators/repeat.js
+// https://github.com/apollographql/apollo-link-state/blob/master/packages/apollo-link-state/src/utils.ts
+// https://github.com/apollographql/apollo-link-state/blob/master/packages/apollo-link-state/src/index.ts
+// https://dev-blog.apollodata.com/simplify-your-react-components-with-apollo-and-recompose-8b9e302dea51

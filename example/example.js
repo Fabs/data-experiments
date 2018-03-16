@@ -32,6 +32,7 @@ observe(packageSource, {
   importantQuery,
   allPackages
 }).subscribe(next, error, complete("obs1"));
+// 👻 filterOperation
 
 // 👷 v0.1 Mediator React API
 import React from "React";
