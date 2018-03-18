@@ -32,9 +32,10 @@ observe(packageSource, {
   importantQuery,
   allPackages
 }).subscribe(next, error, complete("obs1"));
-// 👻 filterOperation
+// 👻 filterOperation to filter particular events
 
-// 👷 v0.1 Mediator React API
+// 🔎 v0.1 Mediator React API - EVENTS
+// 👷 v0.1 Mediator React API data - DATA
 import React from "React";
 import ReactDOMServer from "react-dom/server";
 
