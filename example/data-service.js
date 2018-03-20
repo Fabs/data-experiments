@@ -89,7 +89,12 @@ const observe = (source, operations, options = {}) => {
         source.map(result => {
           return { __operationId: operationId, value: result };
         })
-      )
+      ).catch(err => {
+        return Observable.of({
+          __operationId: "error",
+          value: err
+        });
+      })
     );
   }, Observable.empty());
 
